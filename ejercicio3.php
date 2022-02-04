@@ -13,7 +13,7 @@ $server->handle();
 function getConnection() {
     $user = 'developer';
     $pwd = 'developer';
-    return new PDO('mysql:host=localhost;dbname=examenud6', $user, $pwd);
+    return new PDO('mysql:host=localhost;dbname=poblacion', $user, $pwd);
 }
 
 // Función para obtener ciudades con poblacion mayor o igual a una dada.
@@ -23,7 +23,7 @@ function mostrarCiudades($numPoblacion) {
 
     $sqlQuery = "SELECT * FROM ciudades WHERE poblacion >= ?";
     $stmt = $db->prepare($sqlQuery);
-    $stmt->bindParam(1, $username);
+    $stmt->bindParam(1, $numPoblacion);
 
     $stmt->execute();
 
