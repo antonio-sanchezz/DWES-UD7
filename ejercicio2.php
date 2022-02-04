@@ -20,7 +20,7 @@ if (isset($_POST['enviar'])) {
         // Si los parámetros son correctos, llamamos a la función suma de ejercicio1.php
         $resultado = "La suma es: " . $cliente->suma($num1, $num2);
     } else {
-        $error = "<strong>Error:</strong> Debes introducir dos números mayores a 0.";
+        $error = "<strong>Error:</strong> Debes introducir dos números enteros.";
     }
 }
 ?>
