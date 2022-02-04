@@ -1,49 +1,17 @@
 <?php
 
 /**
- * PARTE SERVIDOR.
- */
-
-// Instanciamos un nuevo servidor SOAP
-$uri="http://192.168.129.80/DWES/DWES-UD7/";
-$server = new SoapServer(null,array('uri'=>$uri));
-$server->addFunction("mostrarCiudades");
-$server->handle();
-
-function getConnection() {
-    $user = 'developer';
-    $pwd = 'developer';
-    return new PDO('mysql:host=localhost;dbname=poblacion', $user, $pwd);
-}
-
-// Función para obtener ciudades con poblacion mayor o igual a una dada.
-function mostrarCiudades($numPoblacion) {
-
-    $db = getConnection();
-
-    $sqlQuery = "SELECT * FROM ciudades WHERE poblacion >= ?";
-    $stmt = $db->prepare($sqlQuery);
-    $stmt->bindParam(1, $numPoblacion);
-
-    $stmt->execute();
-
-    $ciudades = $stmt->fetchAll();
-
-    return $ciudades;
-}
-
-/**
  * PARTE CLIENTE.
  */
 
 // Vaciamos algunas variables
 $error = "";
-$resultado = "";
+$resultado = [];
 $numPoblacion = "";
 
 // Iniciamos el cliente SOAP
 // Escribimos la dirección donde se encuentra el servicio
-$url = "http://192.168.129.80/DWES/DWES-UD7/ejercicio3.php";
+$url = "http://192.168.129.80/DWES/DWES-UD7/ejercicio3-servidor.php";
 $uri = "http://192.168.129.80/DWES/DWES-UD7/";
 $cliente = new SoapClient(null, array('location' => $url, 'uri' => $uri));
 
@@ -69,10 +37,12 @@ if (isset($_POST['enviar'])) {
     <h1>Obtener ciudades</h1>
     <form action="ejercicio3.php" method="post">
     <?php
-        print "<input type='number' name='numPoblacion' value='$num1'>";
+        print "<input type='number' name='numPoblacion' value='$numPoblacion'>";
         print "<input type='submit' name='enviar' value='Buscar'>";
         print "<p class='error'>$error</p>";
-        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>$resultado</p>";
+        foreach($resultado as $ciudad) {
+            print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $ciudad['nombre'] . "</p>";
+        }
     ?>
     </form>
 </body>
