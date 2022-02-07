@@ -11,7 +11,7 @@ $numPoblacion = "";
 
 // Iniciamos el cliente SOAP
 // Escribimos la dirección donde se encuentra el servicio
-$url = "http://192.168.129.80/DWES/DWES-UD7/ejercicio4?controller=ciudades&action=serviceCiudades";
+$url = "http://192.168.129.80/DWES/DWES-UD7/ejercicio4-servidor?controller=ciudades&action=serviceCiudades";
 $uri = "http://192.168.129.80/DWES/DWES-UD7/";
 $cliente = new SoapClient(null, array('location' => $url, 'uri' => $uri));
 
