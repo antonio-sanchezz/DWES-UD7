@@ -44,13 +44,21 @@ if (isset($_POST['enviar'])) {
     
     if (isset($_POST['enviar'])) {
         foreach($result as $person) {
+            
             foreach($person as $person2) {
-                for ($i = 0; $i < count($person2); $i++) {
-                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->ID . "</p>";
-                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->Name . "</p>";
-                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->SSN . "</p>";
-                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->DOB . "</p><br>";
-                }  
+                if (!is_array($person2)) {
+                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2->ID . "</p>";
+                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2->Name . "</p>";
+                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2->SSN . "</p>";
+                    print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2->DOB . "</p><br>";
+                } else {
+                    for ($i = 0; $i < count($person2); $i++) {
+                        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->ID . "</p>";
+                        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->Name . "</p>";
+                        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->SSN . "</p>";
+                        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>" . $person2[$i]->DOB . "</p><br>";
+                    }  
+                }
             }
         }
     }
